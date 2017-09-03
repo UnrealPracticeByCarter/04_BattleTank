@@ -4,6 +4,7 @@
 #include "GameFramework/Actor.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
 
 #include "TankBarrel.h"
 
@@ -48,20 +49,27 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 	
 	
 	if (UGameplayStatics::SuggestProjectileVelocity
-	(
-		this,
-		OutlaunchVelocity,
-		StartLocation,
-		WorldSpaceAim,
-		LaunchSpeed,
-		ESuggestProjVelocityTraceOption::DoNotTrace
-		)// calculate the OutLaunchVelocity
-	)
+			(
+			this,
+			OutlaunchVelocity,
+			StartLocation,
+			WorldSpaceAim,
+			LaunchSpeed,
+			ESuggestProjVelocityTraceOption::DoNotTrace
+			)// calculate the OutLaunchVelocity
+		)
 	{
 		auto AimDirection = OutlaunchVelocity.GetSafeNormal();
-		
 		MoveBarrelTowards(AimDirection);
 
+		auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution Found "), Time);
+
+	}
+	else 
+	{
+		auto Time = GetWorld()->GetTimeSeconds();
+		UE_LOG(LogTemp, Warning, TEXT("%f: No Aim Solution found"), Time);
 	}
 }
 
