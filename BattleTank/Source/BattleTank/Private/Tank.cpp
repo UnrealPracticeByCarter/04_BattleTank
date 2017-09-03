@@ -16,8 +16,13 @@ ATank::ATank()
 
 void ATank::AimAt(FVector HitLocation)
 {
-	TankAimComponenet->AimAt(HitLocation);
+	TankAimComponenet->AimAt(HitLocation, LaunchSpeed);
 
+}
+
+void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
+{
+	TankAimComponenet->SetBarrelReference(BarrelToSet);
 }
 
 // Called when the game starts or when spawned

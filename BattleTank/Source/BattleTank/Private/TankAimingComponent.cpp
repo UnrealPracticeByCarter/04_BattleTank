@@ -2,6 +2,10 @@
 
 #include "TankAimingComponent.h"
 #include "GameFramework/Actor.h"
+#include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+
+#include "TankBarrel.h"
 
 
 // Sets default values for this component's properties
@@ -33,9 +37,51 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	// ...
 }
 
-void UTankAimingComponent::AimAt(FVector WorldSpaceAim)
+
+
+void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 {
+	if (!Barrel) { return; }
+	FVector OutlaunchVelocity;
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+
+	
+	
+	if (UGameplayStatics::SuggestProjectileVelocity
+	(
+		this,
+		OutlaunchVelocity,
+		StartLocation,
+		WorldSpaceAim,
+		LaunchSpeed,
+		ESuggestProjVelocityTraceOption::DoNotTrace
+		)// calculate the OutLaunchVelocity
+	)
+	{
+		auto AimDirection = OutlaunchVelocity.GetSafeNormal();
+		
+		MoveBarrelTowards(AimDirection);
+
+	}
+}
+
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
+
+
 	auto ourTankName = GetOwner()->GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s Aiming Hit at Location %s"), *ourTankName, *WorldSpaceAim.ToString());
+	
+
+	Barrel->Elevate(5); //TODO remove magic number
+}
+
+
+void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
+{
+	Barrel = BarrelToSet;
 }
 
