@@ -34,3 +34,12 @@ void ATankAiController::BeginPlay()
 	}
 	UE_LOG(LogTemp, Warning, TEXT("AIController Begin Play!!"));
 }
+
+void ATankAiController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank()) {
+		
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	}
+}
