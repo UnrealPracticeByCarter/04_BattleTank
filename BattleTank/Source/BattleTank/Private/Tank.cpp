@@ -22,9 +22,20 @@ void ATank::AimAt(FVector HitLocation)
 
 }
 
+void ATank::Fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Tank fired "), Time);
+}
+
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimComponenet->SetBarrelReference(BarrelToSet);
+}
+
+void ATank::SetTurretReference(UTankTurret * TurretToSet)
+{
+	TankAimComponenet->SetTurrentReference(TurretToSet);
 }
 
 // Called when the game starts or when spawned

@@ -7,6 +7,7 @@
 #include "Engine/World.h"
 
 #include "TankBarrel.h"
+#include "TankTurret.h"
 
 
 // Sets default values for this component's properties
@@ -64,16 +65,12 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	{
 		auto AimDirection = OutlaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
+		
+		MoveTurretTowards(AimDirection);
 
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f: Aim solution Found "), Time);
 
 	}
-	else 
-	{
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f: No Aim Solution found"), Time);
-	}
+
 }
 
 
@@ -87,9 +84,27 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Barrel->Elevate(DeltaRotator.Pitch); 
 }
 
+void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
+{
+	
+	auto BarrelRotator = Turret->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
+
+
+	Turret->TurretRotate(DeltaRotator.Yaw);
+}
+
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
+	if (!BarrelToSet) { return; }
 	Barrel = BarrelToSet;
+}
+
+void UTankAimingComponent::SetTurrentReference(UTankTurret * TurretToSet)
+{
+	if (!TurretToSet) { return; }
+	Turret = TurretToSet;
 }
 
