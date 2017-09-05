@@ -40,7 +40,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 
 
-void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	if (!Barrel) { return; }
 	FVector OutlaunchVelocity;
@@ -53,9 +53,12 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 			this,
 			OutlaunchVelocity,
 			StartLocation,
-			WorldSpaceAim,
+			HitLocation,
 			LaunchSpeed,
-			ESuggestProjVelocityTraceOption::DoNotTrace
+				false,
+				0,
+				0,
+				ESuggestProjVelocityTraceOption::DoNotTrace
 			)// calculate the OutLaunchVelocity
 		)
 	{
@@ -81,10 +84,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 
-	auto ourTankName = GetOwner()->GetName();
-	
-
-	Barrel->Elevate(5); //TODO remove magic number
+	Barrel->Elevate(DeltaRotator.Pitch); 
 }
 
 

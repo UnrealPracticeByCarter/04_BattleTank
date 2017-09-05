@@ -3,6 +3,10 @@
 //#include "BattleTank.h"
 #include "TankPlayerController.h"
 #include "Engine/World.h"
+#include "Tank.h"
+
+
+
 
 
 
@@ -43,7 +47,10 @@ void ATankPlayerController::AimTowardsCrosshair() {
 	FVector HitLocation;
 	if (GetSightRayHitLocation( HitLocation)) {
 		GetControlledTank()->AimAt(HitLocation);
+
 	}
+
+	
 }
 
 //Get world location if linetrace through crosshair hit lanscape
@@ -60,11 +67,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector OUT & outHitLocation)
 	if (GetLookDirection(ScreenLocation, CameraLookDirection)) {
 		// line-trace along the look direction and see what is hitted 
 		//UE_LOG(LogTemp, Warning, TEXT("look direction: %s"), *CameraLookDirection.ToString());
-		GetLookVecterHitLocation(CameraLookDirection, outHitLocation);
+		if (GetLookVecterHitLocation(CameraLookDirection, outHitLocation))
+			return true;
 
 	}
-	
-	return true;
+
+	return false;
 }
 
 bool ATankPlayerController::GetLookVecterHitLocation(FVector LookDirection, FVector & outHitLocation) const {

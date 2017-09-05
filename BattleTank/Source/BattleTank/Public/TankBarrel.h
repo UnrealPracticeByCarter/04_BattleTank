@@ -22,7 +22,7 @@ private:
 
 	// all used for the elevation of barrel
 	UPROPERTY(EditAnywhere)
-	float MaxDegreePerSecond = 20; //Sensible default
+	float MaxDegreePerSecond = 5; //Sensible default
 
 	UPROPERTY(EditAnywhere)
 	float MaxElevationDegrees = 40; //TODO 
