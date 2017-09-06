@@ -7,6 +7,10 @@
 #include "TankAimingComponent.h"
 #include "Tank.generated.h"
 
+
+
+class AProjectile;
+
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
@@ -21,7 +25,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
-
+	
 
 	void AimAt(FVector HitLocation);
 	
@@ -45,6 +49,10 @@ private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 7000; 
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint; //Alternateive : there is a one
+
+	UTankBarrel *Barrel = nullptr;
 	
 	
 };
