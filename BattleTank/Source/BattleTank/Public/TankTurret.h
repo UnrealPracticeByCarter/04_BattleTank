@@ -19,7 +19,7 @@ public:
 
 private:
 	// all used for the elevation of barrel
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float MaxRotateDegreePerSecond = 25; 
 
 
