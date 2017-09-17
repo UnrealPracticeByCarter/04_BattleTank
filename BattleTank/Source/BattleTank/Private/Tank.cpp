@@ -4,6 +4,7 @@
 #include "Engine/World.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
+#include "TankAimingComponent.h"
 
 
 // Sets default values
@@ -13,13 +14,13 @@ ATank::ATank()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// No need to protect pointters as added at construction
-	TankAimComponenet = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	TankAimComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 
 }
 
 void ATank::AimAt(FVector HitLocation)
 {
-	TankAimComponenet->AimAt(HitLocation, LaunchSpeed);
+	TankAimComponent->AimAt(HitLocation, LaunchSpeed);
 
 
 }
@@ -41,13 +42,13 @@ void ATank::Fire()
 
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
-	TankAimComponenet->SetBarrelReference(BarrelToSet);
+	TankAimComponent->SetBarrelReference(BarrelToSet);
 	Barrel = BarrelToSet;
 }
 
 void ATank::SetTurretReference(UTankTurret * TurretToSet)
 {
-	TankAimComponenet->SetTurrentReference(TurretToSet);
+	TankAimComponent->SetTurrentReference(TurretToSet);
 }
 
 // Called when the game starts or when spawned
