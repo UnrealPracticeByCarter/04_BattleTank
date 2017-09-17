@@ -16,7 +16,7 @@ ATank::ATank()
 
 	// No need to protect pointters as added at construction
 	TankAimComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-	TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));
+
 
 }
 
