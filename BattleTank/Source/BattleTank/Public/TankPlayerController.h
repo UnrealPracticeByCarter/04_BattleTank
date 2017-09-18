@@ -20,7 +20,7 @@ public:
 
 
 private:
-
+	UFUNCTION(BlueprintCallable, Category = "SetUp")
 	ATank* GetControlledTank() const;
 	
 	virtual void BeginPlay() override;
