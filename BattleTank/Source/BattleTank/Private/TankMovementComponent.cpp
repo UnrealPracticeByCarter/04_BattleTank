@@ -19,7 +19,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw) {
 
 void UTankMovementComponent::IntendMoveRight(float Throw)
 {
-	//UE_LOG(LogTemp, Warning, TEXT(" Intend to move right with Throw: %f "), Throw);
+	
 	LeftTrack->setThrottle(Throw);
 	RightTrack->setThrottle(-Throw);
 
