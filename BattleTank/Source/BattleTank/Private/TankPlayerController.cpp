@@ -4,6 +4,7 @@
 #include "TankPlayerController.h"
 #include "Engine/World.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 
 
 
@@ -17,14 +18,13 @@ ATank* ATankPlayerController::GetControlledTank() const {
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto PossesedTank = GetControlledTank();
-	if (!PossesedTank) {
-		UE_LOG(LogTemp, Warning, TEXT("PlayController not possesing a tank"));
+	auto AimingComponent = GetControlledTank()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
+	if (AimingComponent) {
+		FoundAimingComponent(AimingComponent); // call this function in the blueprint, pass the aiming component to blueprint
 	}
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController possesing %s!!"), *PossesedTank->GetName() );
+		UE_LOG(LogTemp, Warning, TEXT("CarterKun : The Aiming Component Can not be found"))
 	}
-	UE_LOG(LogTemp, Warning, TEXT("PlayerController Begin Play!!"));
 }
 
 //Tick

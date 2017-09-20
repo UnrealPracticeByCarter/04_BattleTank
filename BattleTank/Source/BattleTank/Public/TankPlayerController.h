@@ -9,8 +9,9 @@
 
 
 class ATank;
+class UTankAimingComponent;
 /**
- * 
+ * Responsible for helping the player aim
  */
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
@@ -19,9 +20,18 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 public:
 
 
-private:
+protected:
+	// when connected to the blueprint, why we want to put in the protected, because the blueprint is a 
+	// subcalss of the C++ code.
 	UFUNCTION(BlueprintCallable, Category = "SetUp")
 	ATank* GetControlledTank() const;
+
+	UFUNCTION(BlueprintImplementableEvent, Category = "SetUp")
+	void FoundAimingComponent(UTankAimingComponent * AimComRef); // the Aim Com Ref is a type of Tank Aiming Component
+	// in the blue print will set the AimComRef to be the TANKAIMINGCOMPONENT menber of the UI widget.
+
+private:
+
 	
 	virtual void BeginPlay() override;
 	virtual void Tick(float ) override;

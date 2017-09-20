@@ -22,7 +22,7 @@ ATank::ATank()
 
 void ATank::BeginPlay() {
 	//Super?
-	Super::BeginPlay();
+	Super::BeginPlay(); // Need this so that the Blueprint Beginplay event can actually work
 
 }
 
@@ -31,7 +31,6 @@ void ATank::AimAt(FVector HitLocation)
 {
 	if (!TankAimComponent) { return; }
 	TankAimComponent->AimAt(HitLocation, LaunchSpeed);
-
 
 }
 
