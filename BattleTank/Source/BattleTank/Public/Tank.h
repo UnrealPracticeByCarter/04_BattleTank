@@ -36,7 +36,7 @@ protected:
 
 
 private:	
-
+	virtual void BeginPlay() override;
 
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
