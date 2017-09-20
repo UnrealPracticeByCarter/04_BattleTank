@@ -19,10 +19,13 @@ ATank::ATank()
 
 }
 
+
 void ATank::BeginPlay() {
 	//Super?
+	Super::BeginPlay();
 
 }
+
 
 void ATank::AimAt(FVector HitLocation)
 {
