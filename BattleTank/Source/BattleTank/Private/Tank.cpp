@@ -24,6 +24,7 @@ void ATank::BeginPlay() {
 	//Super?
 	Super::BeginPlay(); // Need this so that the Blueprint Beginplay event can actually work
 
+	TankAimComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 

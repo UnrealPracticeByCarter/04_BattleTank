@@ -38,7 +38,7 @@ protected:
 private:	
 	virtual void BeginPlay() override;
 
-
+	//TODO remove after finish the aiming and the fire
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float LaunchSpeed = 7000; 
 

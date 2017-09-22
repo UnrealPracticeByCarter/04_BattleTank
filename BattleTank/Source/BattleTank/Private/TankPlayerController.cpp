@@ -22,9 +22,7 @@ void ATankPlayerController::BeginPlay()
 	if (ensure(AimingComponent)) {
 		FoundAimingComponent(AimingComponent); // call this function in the blueprint, pass the aiming component to blueprint
 	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("CarterKun : The Aiming Component Can not be found"))
-	}
+
 }
 
 //Tick
@@ -35,7 +33,7 @@ void ATankPlayerController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 	
 	AimTowardsCrosshair();
-	//UE_LOG(LogTemp, Warning, TEXT("PlayerController Ticking!!"));
+
 
 }
 
@@ -60,13 +58,12 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector OUT & outHitLocation)
 	int32 viewPortSizeX, viewPortSizeY;
 	GetViewportSize(viewPortSizeX, viewPortSizeY); //this is a inside function for getting the screen window size?
 	auto ScreenLocation = FVector2D(viewPortSizeX * CrossHairXposition, viewPortSizeY * CrossHairYposition);
-	//UE_LOG(LogTemp, Warning, TEXT("Screen Location: %s"), *ScreenLocation.ToString());
+
 
 	//"De-project" the screen position of the crosshair to a world direction
 	FVector CameraLookDirection;
 	if (GetLookDirection(ScreenLocation, CameraLookDirection)) {
-		// line-trace along the look direction and see what is hitted 
-		//UE_LOG(LogTemp, Warning, TEXT("look direction: %s"), *CameraLookDirection.ToString());
+
 		if (GetLookVecterHitLocation(CameraLookDirection, outHitLocation))
 			return true;
 

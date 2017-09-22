@@ -8,7 +8,7 @@
 
 void UTankMovementComponent::IntendMoveForward(float Throw) {
 
-	//UE_LOG(LogTemp, Warning, TEXT(" Intend to move forward with Throw: %f "),  Throw);
+
 	if (!ensure(LeftTrack) || !ensure(RightTrack)) { return; }
 	LeftTrack->setThrottle(Throw);
 	RightTrack->setThrottle(Throw);
@@ -50,6 +50,5 @@ void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, boo
 
 	IntendMoveForward(ForwardThrow);
 	IntendMoveRight(RightThrow);
-	//UE_LOG(LogTemp, Warning, TEXT("%s vectering to %s"), *TankName, *MoveVelocityString);
-	
+
 }
