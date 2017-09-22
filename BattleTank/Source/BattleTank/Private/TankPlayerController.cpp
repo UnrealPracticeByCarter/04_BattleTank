@@ -19,7 +19,7 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	auto AimingComponent = GetControlledTank()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
-	if (AimingComponent) {
+	if (ensure(AimingComponent)) {
 		FoundAimingComponent(AimingComponent); // call this function in the blueprint, pass the aiming component to blueprint
 	}
 	else {
@@ -42,7 +42,7 @@ void ATankPlayerController::Tick(float DeltaTime) {
 
 
 void ATankPlayerController::AimTowardsCrosshair() {
-	if (!GetControlledTank()) { return;}
+	if (!ensure(GetControlledTank())) { return;}
 	//if it hit the lanscape
 	FVector HitLocation;
 	if (GetSightRayHitLocation( HitLocation)) {
