@@ -3,7 +3,7 @@
 //#include "BattleTank.h"
 #include "TankPlayerController.h"
 #include "Engine/World.h"
-#include "Tank.h"
+
 #include "TankAimingComponent.h"
 
 
@@ -11,14 +11,10 @@
 
 
 
-ATank* ATankPlayerController::GetControlledTank() const {
-	return Cast <ATank>(GetPawn());
-}
-
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto AimingComponent = GetControlledTank()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
+	auto AimingComponent = GetControlledPawn()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
 	if (ensure(AimingComponent)) {
 		FoundAimingComponent(AimingComponent); // call this function in the blueprint, pass the aiming component to blueprint
 	}
@@ -40,12 +36,11 @@ void ATankPlayerController::Tick(float DeltaTime) {
 
 
 void ATankPlayerController::AimTowardsCrosshair() {
-	if (!ensure(GetControlledTank())) { return;}
-	//if it hit the lanscape
-	FVector HitLocation;
-	if (GetSightRayHitLocation( HitLocation)) {
-		GetControlledTank()->AimAt(HitLocation);
-
+	auto AimingComponent = GetControlledPawn()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
+	if (ensure(AimingComponent)) {
+		FVector HitLocation;
+		if (GetSightRayHitLocation(HitLocation))
+			AimingComponent->AimAt(HitLocation);
 	}
 
 	

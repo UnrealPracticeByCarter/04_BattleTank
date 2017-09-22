@@ -8,7 +8,7 @@
 #include "TankPlayerController.generated.h" // must be the last include
 
 
-class ATank;
+
 class UTankAimingComponent;
 /**
  * Responsible for helping the player aim
@@ -21,10 +21,9 @@ public:
 
 
 protected:
-	// when connected to the blueprint, why we want to put in the protected, because the blueprint is a 
-	// subcalss of the C++ code.
-	UFUNCTION(BlueprintCallable, Category = "SetUp")
-	ATank* GetControlledTank() const;
+
+
+	 
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "SetUp")
 	void FoundAimingComponent(UTankAimingComponent * AimComRef); // the Aim Com Ref is a type of Tank Aiming Component

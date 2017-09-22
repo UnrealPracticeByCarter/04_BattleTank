@@ -4,7 +4,7 @@
 #include "Engine/World.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
-#include "TankAimingComponent.h"
+
 
 
 
@@ -24,16 +24,9 @@ void ATank::BeginPlay() {
 	//Super?
 	Super::BeginPlay(); // Need this so that the Blueprint Beginplay event can actually work
 
-	TankAimComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimComponent)) { return; }
-	TankAimComponent->AimAt(HitLocation, LaunchSpeed);
-
-}
 
 void ATank::Fire()
 {

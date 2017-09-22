@@ -24,15 +24,13 @@ public:
 	
 	
 	
-	void AimAt(FVector HitLocation);
+	
 	
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Fire();
 
 
 protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimComponent = nullptr;
 
 
 private:	

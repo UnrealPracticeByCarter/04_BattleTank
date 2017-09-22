@@ -26,7 +26,7 @@ class BATTLETANK_API UTankAimingComponent : public UActorComponent
 
 public:	
 
-	void AimAt(FVector WorldSpaceAim, float LaunchSpeed);
+	void AimAt(FVector WorldSpaceAim);
 
 	UFUNCTION(BlueprintCallable, Category = "SetUp")
 	void Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet);
@@ -40,7 +40,8 @@ protected:
 	EFiringState FiringState = EFiringState::Locked;
 
 private:	
-
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 7000;
 
 
 	UTankBarrel *Barrel = nullptr;
