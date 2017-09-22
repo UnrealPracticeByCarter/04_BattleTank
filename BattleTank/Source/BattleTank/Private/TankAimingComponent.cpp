@@ -8,6 +8,7 @@
 
 #include "TankBarrel.h"
 #include "TankTurret.h"
+#include "Projectile.h"
 
 
 // Sets default values for this component's properties
@@ -87,4 +88,21 @@ void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
 	Turret->TurretRotate(DeltaRotator.Yaw);
 }
 
+
+
+void UTankAimingComponent::Fire()
+{
+	if (!ensure(Barrel) || !ensure(ProjectileBlueprint)) { return; }
+	bool isReload = (FPlatformTime::Seconds() - LastFireTime)>ReloadTIme;
+
+	if (isReload) {
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			Barrel->GetSocketLocation(FName("Projectile")),
+			Barrel->GetSocketRotation(FName("Projectile"))
+			);
+		Projectile->Launchprojectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
+}
 

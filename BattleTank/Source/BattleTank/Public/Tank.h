@@ -8,46 +8,17 @@
 
 
 
-class AProjectile;
-class UTankAimingComponent;
-
-class UTankBarrel;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
-
 public:
-	// Sets default values for this pawn's properties
 	ATank();
-	
-	
-	
-	
-	
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void Fire();
-
-
-protected:
-
-
 private:	
-	virtual void BeginPlay() override;
 
-	//TODO remove after finish the aiming and the fire
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float LaunchSpeed = 7000; 
 
-	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	TSubclassOf<AProjectile> ProjectileBlueprint; //Alternateive : there is a one
 
-	UTankBarrel *Barrel = nullptr; //TODO remove
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-	float ReloadTIme = 3.;
-	double LastFireTime;
 	
 	
 };

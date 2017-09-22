@@ -14,7 +14,7 @@
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto AimingComponent = GetControlledPawn()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
+	auto AimingComponent = GetPawn()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
 	if (ensure(AimingComponent)) {
 		FoundAimingComponent(AimingComponent); // call this function in the blueprint, pass the aiming component to blueprint
 	}
@@ -36,7 +36,7 @@ void ATankPlayerController::Tick(float DeltaTime) {
 
 
 void ATankPlayerController::AimTowardsCrosshair() {
-	auto AimingComponent = GetControlledPawn()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
+	auto AimingComponent = GetPawn()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
 	if (ensure(AimingComponent)) {
 		FVector HitLocation;
 		if (GetSightRayHitLocation(HitLocation))
