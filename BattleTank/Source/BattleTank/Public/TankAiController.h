@@ -20,8 +20,9 @@ private:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-
+protected: //since we want to use them in the child blueprint class
 	// how close AI shoudl get close to
-	float AcceptanceRadius = 3000;
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float AcceptanceRadius = 8000;
 	
 };

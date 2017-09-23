@@ -30,6 +30,8 @@ void UTankTrack::BeginPlay()
 }
 
 void UTankTrack::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+	auto Name = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s, is on Hit"), *Name);
 	//Dirve the Track
 	DriveTrack();
 	//Apply Sideways Force
