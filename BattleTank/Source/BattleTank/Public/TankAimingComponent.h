@@ -39,7 +39,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 	UFUNCTION(BlueprintCallable,Category = "Get")
-	int GetRoundsLeft() const { return RoundsLeft; }
+	int32 GetRoundsLeft() const { return RoundsLeft; }
 protected:
 
 
@@ -68,10 +68,13 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ReloadTIme = 3.;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 RoundsLeft = 3;
+
 	double LastFireTime;
 	FVector AimDirection;
 
-	int RoundsLeft = 3;
+	
 	
 	
 };
