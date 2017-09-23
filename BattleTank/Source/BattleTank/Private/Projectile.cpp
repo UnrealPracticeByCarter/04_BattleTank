@@ -18,7 +18,7 @@ AProjectile::AProjectile()
 	CollisionMesh->SetVisibility(false);
 
 
-	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Particle"));
+	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
 	LaunchBlast->AttachTo(RootComponent);
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
