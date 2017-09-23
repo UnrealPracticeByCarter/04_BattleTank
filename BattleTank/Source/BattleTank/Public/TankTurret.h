@@ -20,7 +20,7 @@ public:
 private:
 	// all used for the elevation of barrel
 	UPROPERTY(EditDefaultsOnly)
-	float MaxRotateDegreePerSecond = 25; 
+	float MaxRotateDegreePerSecond = 30; 
 
 
 	
