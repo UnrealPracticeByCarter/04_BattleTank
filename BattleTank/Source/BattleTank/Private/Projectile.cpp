@@ -16,10 +16,11 @@ AProjectile::AProjectile()
 	SetRootComponent(CollisionMesh);
 	CollisionMesh->SetNotifyRigidBodyCollision(true);
 	CollisionMesh->SetVisibility(false);
+	
 
-
-	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Launch Blast"));
+	LaunchBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("launch blast"));
 	LaunchBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
+	//LaunchBlast->
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
 	ProjectileMovement->bAutoActivate = false;
