@@ -34,6 +34,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "SetUp")
 	void Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet);
 
+	EFiringState GetFiringState() const { return FiringState; }
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 protected:

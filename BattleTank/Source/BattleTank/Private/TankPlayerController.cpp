@@ -41,7 +41,9 @@ void ATankPlayerController::AimTowardsCrosshair() {
 	auto AimingComponent = GetPawn()->FindComponentByClass <UTankAimingComponent>(); // get the Aim component by find component by class
 	if (ensure(AimingComponent)) {
 		FVector HitLocation;
-		if (GetSightRayHitLocation(HitLocation))
+		bool bGotHitLocation = GetSightRayHitLocation(HitLocation);
+		UE_LOG(LogTemp, Warning, TEXT("bGotHitLocation: %i"), bGotHitLocation);
+		if(bGotHitLocation)
 			AimingComponent->AimAt(HitLocation);
 	}
 
@@ -60,10 +62,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector OUT & outHitLocation)
 	//"De-project" the screen position of the crosshair to a world direction
 	FVector CameraLookDirection;
 	if (GetLookDirection(ScreenLocation, CameraLookDirection)) {
-
-		if (GetLookVecterHitLocation(CameraLookDirection, outHitLocation))
-			return true;
-
+		return GetLookVecterHitLocation(CameraLookDirection, outHitLocation);
 	}
 
 	return false;
