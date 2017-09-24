@@ -19,10 +19,19 @@ class BATTLETANK_API ATankAiController : public AAIController
 private:
 
 	virtual void BeginPlay() override;
+
+	virtual void SetPawn(APawn * InPawn) override;
+
 	virtual void Tick(float DeltaTime) override;
+
+	UFUNCTION()
+	void OnPossedTankDeath();
+
+
 protected: //since we want to use them in the child blueprint class
 	// how close AI shoudl get close to
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float AcceptanceRadius = 8000;
 	
+
 };
