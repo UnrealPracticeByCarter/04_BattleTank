@@ -3,13 +3,28 @@
 //#include "BattleTank.h"
 #include "TankPlayerController.h"
 #include "Engine/World.h"
-
+#include "Tank.h"
 #include "TankAimingComponent.h"
 
 
 
+void ATankPlayerController::SetPawn(APawn * InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast <ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+		//TODO Subscribe our local method to the tank's death event
+		PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPossedTankDeath); // when on death is called we will call the OnPossedTankDeath function 
+	}
+}
 
 
+void ATankPlayerController::OnPossedTankDeath()
+{
+	StartSpectatingOnly();
+}
 
 void ATankPlayerController::BeginPlay()
 {
@@ -90,3 +105,5 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& 
 	return DeprojectScreenPositionToWorld(ScreenLocation.X, ScreenLocation.Y, CameraWorldLocation, CameraLookDirection);
 
 }
+
+
